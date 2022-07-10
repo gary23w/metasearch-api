@@ -5,6 +5,6 @@
   "logo": "https://raw.githubusercontent.com/gary23w/android-resistor-scanner/master/app/src/main/res/mipmap-hdpi/ic_launcher.png",
   "keywords": ["golang", "rest", "api"],
   "scripts": {
-    "postdeploy": "go run main.go api start"
+    "postdeploy": "./metasearch_api api start"
   }
 }
