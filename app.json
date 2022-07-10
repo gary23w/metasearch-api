@@ -6,6 +6,6 @@
   "keywords": ["golang", "rest", "api"],
   "env": ["PORT=8080"],
   "scripts": {
-    "start": "./metasearch_api api start"
+    "postdeploy": "metasearch_api api start"
   }
 }
