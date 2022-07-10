@@ -5,23 +5,26 @@ import (
 	"encoding/hex"
 	"fmt"
 	"log"
+	"os"
 	"strings"
 
 	"github.com/spf13/cobra"
 
+	api "github.com/gary23w/metasearch_api/api"
 	enginesearch "github.com/gary23w/metasearch_api/internal/engine"
 	_ "github.com/gary23w/metasearch_api/internal/providers/all"
 	"github.com/gary23w/metasearch_api/internal/search"
 )
 
 var system = &cobra.Command{
-	Use:   "metasearch",
-	Short: "runs a metasearch engine",
+	Use:   "metasearch_api",
+	Short: "runs a metasearch rest api engine",
 }
 
 func init() {
 	cmdQuery := &cobra.Command{
 		Use:     "query [search query]",
+		Short:   "search for a query",
 		Aliases: []string{"qu", "q"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			qu := strings.Join(args, " ")
@@ -56,6 +59,7 @@ func init() {
 
 	cmdAutoc := &cobra.Command{
 		Use:     "complete [search query]",
+		Short:   "autocomplete for a query",
 		Aliases: []string{"ac"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			qu := strings.Join(args, " ")
@@ -75,6 +79,22 @@ func init() {
 		},
 	}
 	system.AddCommand(cmdAutoc)
+
+	cmdAPI := &cobra.Command{
+		Use:     "api start",
+		Short:   "start the api",
+		Aliases: []string{"api"},
+		RunE: func(cmd *cobra.Command, args []string) error {
+			port := "8080"
+			//cloud provider support
+			if os.Getenv("PORT") != "" {
+				port = os.Getenv("PORT")
+			}
+			api.Start(port)
+			return nil
+		},
+	}
+	system.AddCommand(cmdAPI)
 }
 
 func Execute() {
