@@ -4,7 +4,13 @@
   "repository": "https://github.com/gary23w/metasearch_api",
   "logo": "https://raw.githubusercontent.com/gary23w/android-resistor-scanner/master/app/src/main/res/mipmap-hdpi/ic_launcher.png",
   "keywords": ["golang", "rest", "api"],
+  "env": {
+    "PORT": {
+      "description": "REST API PORT",
+      "generator": "number"
+    }
+  },
   "scripts": {
-    "start": "go run main.go api start"
+    "postdeploy": "go run main.go api start"
   }
 }
